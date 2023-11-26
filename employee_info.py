@@ -1,4 +1,4 @@
-# Define a dictionary to store employee information
+# Define a list of dictionaries to store employee information
 employee_data = [
     {"name": "John", "age": 30, "department": "Sales", "salary": 50000},
     {"name": "Jane", "age": 25, "department": "Marketing", "salary": 60000},
@@ -8,44 +8,68 @@ employee_data = [
     {"name": "Peter", "age": 40, "department": "Sales", "salary": 60000}
 ]
 
+
+###############################################
+#
+###############################################
 def get_employees_by_age_range(age_lower_limit, age_upper_limit):
     result = []
 
     # check for age limits and append the item to result
-    for item in employee_data:
+    for item in employee_data: # Loop through every dictionary in the "employee_data" list
         if int(item["age"]) > int(age_lower_limit) and int(item["age"]) < int(age_upper_limit):
             result.append(item)
 
     return result
 
+
+###############################################
+#
+###############################################
 def calculate_average_salary():
     total = 0
-    average = 0
+    for item in employee_data:
+        total = total + item["salary"]
 
-    #add your implementation to calculate here
-
-
+    average = total/len(employee_data)
+    average = round(average, 2) # Round to 2 decimal points
     return average
 
+
+###############################################
+#
+###############################################
 def get_employees_by_dept(department):
     result = []
 
-    # Add your implementation from here
-
+    for item in employee_data:
+        if (item["department"] == department):
+            result.append(item)
 
     return result
 
+
+###############################################
+#
+###############################################
 def display_all_records():
     print(("Name" + "\t" +"Age" +"\t" +"Department" +"\t" +"Salary" ).expandtabs(15))
     for item in employee_data:
         print((item["name"] + "\t" + str(item["age"]) + "\t" + item["department"] + "\t" + str(item["salary"])).expandtabs(15))
 
 
+###############################################
+#
+###############################################
 def display_records(employee_info):
     print(("Name" + "\t" +"Age" +"\t" +"Department" +"\t" +"Salary" ).expandtabs(15))
     for item in employee_info:
         print((item["name"] + "\t" + str(item["age"]) + "\t" + item["department"] + "\t" + str(item["salary"])).expandtabs(15))
 
+
+###############################################
+#
+###############################################
 def display_main_menu():
 
     print("\n----- Employee information Tracker -----")
@@ -63,7 +87,8 @@ def display_main_menu():
     option = input("Enter selection =>")
 
     if option == '1':
-        display_all_records()
+        #display_all_records()
+        display_records(employee_data)
 
     elif option == '2':
         average_salary = calculate_average_salary()
@@ -81,14 +106,21 @@ def display_main_menu():
         employee_info = get_employees_by_dept(department)
         display_records(employee_info)
 
-    elif option == 'Q':
+    elif option == 'Q' or option == 'q':
         quit()
 
+
+###############################################
+#
+###############################################
 def main():
 
     while (True):
         display_main_menu()
 
 
+###############################################
+#
+###############################################
 if __name__ == "__main__":
     main()
